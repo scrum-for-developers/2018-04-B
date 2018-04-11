@@ -3,10 +3,8 @@ package de.codecentric.psd.worblehat.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class BookTest {
 
@@ -51,5 +49,13 @@ public class BookTest {
         BOOK.borrowNowByBorrower("a@bc.de");
         BOOK.borrowNowByBorrower("a@bc.ru");
         assertThat(BOOK.getBorrowing().getBorrowerEmailAddress(), is("a@bc.de"));
+    }
+
+    @Test
+    public void shouldReturnCorrectValueWhenAskedIfBookHasCover() {
+        Book anotherCopy = new Book(BOOK.getTitle(), BOOK.getAuthor(), BOOK.getEdition(), BOOK.getIsbn(), BOOK.getYearOfPublication());
+        assertThat(anotherCopy.hasBookCover(), is(false));
+        anotherCopy.setBookCoverImageURL("http://someurl");
+        assertThat(anotherCopy.hasBookCover(), is(true));
     }
 }

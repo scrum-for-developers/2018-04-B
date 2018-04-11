@@ -1,0 +1,1 @@
+ALTER TABLE contacts ADD book_cover_image_url VARCHAR(255);

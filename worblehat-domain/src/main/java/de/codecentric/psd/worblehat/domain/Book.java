@@ -1,10 +1,8 @@
 package de.codecentric.psd.worblehat.domain;
 
 import javax.annotation.Nonnull;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * Entity implementation class for Entity: Book
@@ -25,6 +23,8 @@ public class Book implements Serializable {
 	// TODO: convert String to an ISBN class, that ensures a valid ISBN
 	private String isbn;
 	private int yearOfPublication;
+
+	private String bookCoverImageURL;
 
 	@OneToOne(mappedBy = "borrowedBook", orphanRemoval = true)
 	private Borrowing borrowing;
@@ -61,6 +61,15 @@ public class Book implements Serializable {
 		this.edition = edition;
 		this.isbn = isbn;
 		this.yearOfPublication = yearOfPublication;
+	}
+
+	public Book(@Nonnull String title, @Nonnull String author, @Nonnull String edition, @Nonnull  String isbn, int yearOfPublication, String bookCoverImageURL) {
+		this.title = title;
+		this.author = author;
+		this.edition = edition;
+		this.isbn = isbn;
+		this.yearOfPublication = yearOfPublication;
+		this.bookCoverImageURL = bookCoverImageURL;
 	}
 
 	public String getTitle() {
@@ -105,6 +114,18 @@ public class Book implements Serializable {
 
     public Borrowing getBorrowing() {
 		return borrowing;
+	}
+
+	public String getBookCoverImageURL() {
+		return bookCoverImageURL;
+	}
+
+	public void setBookCoverImageURL(String bookCoverImageURL) {
+		this.bookCoverImageURL = bookCoverImageURL;
+	}
+
+	public boolean hasBookCover() {
+		return !(this.bookCoverImageURL == null) && !this.bookCoverImageURL.isEmpty();
 	}
 
 	boolean isSameCopy(@Nonnull Book book) {
