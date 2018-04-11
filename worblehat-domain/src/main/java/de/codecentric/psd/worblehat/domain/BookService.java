@@ -22,4 +22,8 @@ public interface BookService {
 	boolean bookExists(String isbn);
 
 	void deleteAllBooks();
+
+	List<Borrowing> findMyBooksAsBorrowings(String borrower);
+
+	List<Book> findMyBooksAsBooks(String borrower);
 }

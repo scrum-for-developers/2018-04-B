@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Show all my Books</title>
+</head>
+<body>
+
+
+	<form th:object="${myBookData}" method="POST">
+		<br />
+			Email:<input id="email" type="text" th:field="*{email}" />
+			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+		<br />
+			<input type="submit" id="showMyBooks" value="Show my Books" />
+
+	</form>
+
+	<div th:if="${not #lists.isEmpty(myBooks)}">
+		<hr />
+		<table class="bookList">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>ISBN</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="book : ${myBooks}">
+				<td th:text="${book.title}">Harry Potter</td>
+				<td th:text="${book.isbn}">123456</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	<hr />
+	<a th:href="@{/}">Back to Home</a>
+</body>
+</html>
