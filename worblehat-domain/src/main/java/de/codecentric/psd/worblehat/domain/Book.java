@@ -125,7 +125,7 @@ public class Book implements Serializable {
 	}
 
 	public boolean hasBookCover() {
-		return !(this.bookCoverImageURL == null) && !this.bookCoverImageURL.isEmpty();
+		return this.bookCoverImageURL != null && !this.bookCoverImageURL.isEmpty();
 	}
 
 	boolean isSameCopy(@Nonnull Book book) {
