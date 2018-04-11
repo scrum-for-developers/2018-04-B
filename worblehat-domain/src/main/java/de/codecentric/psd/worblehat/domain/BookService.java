@@ -1,6 +1,5 @@
 package de.codecentric.psd.worblehat.domain;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,4 +22,8 @@ public interface BookService {
 	boolean bookExists(String isbn);
 
 	void deleteAllBooks();
+
+	List<Borrowing> findMyBooksAsBorrowings(String borrower);
+
+	List<Book> findMyBooksAsBooks(String borrower);
 }

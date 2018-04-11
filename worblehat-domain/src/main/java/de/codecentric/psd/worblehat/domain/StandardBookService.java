@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -62,6 +63,21 @@ public class StandardBookService implements BookService {
 	@Override
 	public List<Book> findAllBooks() {
 		return bookRepository.findAllByOrderByTitle();
+	}
+
+	@Override
+	public List<Borrowing> findMyBooksAsBorrowings(String borrower) {
+		return borrowingRepository.findBorrowingsByBorrower(borrower);
+	}
+
+	@Override
+	public List<Book> findMyBooksAsBooks(String borrower) {
+		List<Borrowing> borrowings = findMyBooksAsBorrowings(borrower);
+		List<Book> bookList = new ArrayList<>();
+		for(Borrowing borrowing:borrowings) {
+			bookList.add(borrowing.getBorrowedBook());
+		}
+		return bookList;
 	}
 
 
