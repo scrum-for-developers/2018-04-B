@@ -1,1 +1,1 @@
-ALTER TABLE contacts ADD book_cover_image_url VARCHAR(255);
+ALTER TABLE book ADD book_cover_imageurl VARCHAR(255);

@@ -21,6 +21,9 @@
 			Year:<input type="text" th:field="*{yearOfPublication}" />
 		<span class="error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
 		<br />
+			Cover Image URL:<input type="text" th:field="*{bookCoverImageURL}" />
+		<span class="error" th:if="${#fields.hasErrors('bookCoverImageURL')}" th:errors="*{bookCoverImageURL}"></span>
+		<br />
 		<input type="submit" id="addBook" value="Add Book" />
 		<hr/>
 		<a th:href="@{/}">Back to Home</a>

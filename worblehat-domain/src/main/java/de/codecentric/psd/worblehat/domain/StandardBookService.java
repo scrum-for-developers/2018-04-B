@@ -64,14 +64,14 @@ public class StandardBookService implements BookService {
 		return bookRepository.findAllByOrderByTitle();
 	}
 
-
 	@Override
 	public Optional<Book> createBook(@Nonnull String title,
 									 @Nonnull String author,
 									 @Nonnull String edition,
 									 @Nonnull String isbn,
-									 int yearOfPublication) {
-		Book book = new Book(title, author, edition, isbn, yearOfPublication);
+									 int yearOfPublication,
+									 String bookCoverImageURL) {
+		Book book = new Book(title, author, edition, isbn, yearOfPublication, bookCoverImageURL);
 
 		Optional<Book> bookFromRepo = bookRepository.findTopByIsbn(isbn);
 
