@@ -12,23 +12,26 @@
 			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 		<br />
 			<input type="submit" id="showMyBooks" value="Show my Books" />
-		<hr />
+
 	</form>
 
-	<table class="bookList">
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>ISBN</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr th:each="book : ${myBooks}">
-			<td th:text="${book.title}">Harry Potter</td>
-			<td th:text="${book.isbn}">123456</td>
-		</tr>
-	</tbody>
-	</table>
+	<div th:if="${not #lists.isEmpty(myBooks)}">
+		<hr />
+		<table class="bookList">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>ISBN</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="book : ${myBooks}">
+				<td th:text="${book.title}">Harry Potter</td>
+				<td th:text="${book.isbn}">123456</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
 	<hr />
 	<a th:href="@{/}">Back to Home</a>
 </body>
