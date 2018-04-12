@@ -33,6 +33,9 @@
 			<action dev="sebastianwr" type="update">
 				Improved error messages for increased usability
 			</action>
+			<action dev="vincentw" type="add">
+				Added description for a book
+			</action>
 		</release>
 	</body>
 </document>
