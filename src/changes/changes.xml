@@ -31,6 +31,15 @@
 
 		<release version="1.2" date="2018-04-12" description="Improved functionality according to PO">
 			<action dev="rené/michael" type="update">
+				Buchanlage mit identischer ISBN ist nur noch möglich, wenn Titel, Autor und Auflage die selbe sind (vorher war nur Titel und Autor nötig)
+			</action>
+			<action dev="sebastianwr" type="update">
+				Improved error messages for increased usability
+			</action>
+			<action dev="vincentw" type="add">
+				Added description for a book
+			</action>
+			<action dev="rené/michael" type="update">
 				Anzeige der Anwendungs-Version auf allen Seiten
 			</action>
 		</release>
