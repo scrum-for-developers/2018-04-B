@@ -33,6 +33,8 @@ public class BookDataFormData {
 	@URL(message = "{notvalid.bookDataFormData.bookCoverImageURL}")
 	private String bookCoverImageURL;
 
+	private String description;
+
 	public String getYearOfPublication() {
 		return yearOfPublication;
 	}
@@ -73,11 +75,18 @@ public class BookDataFormData {
 		this.edition = edition;
 	}
 
+
 	@Override
 	public String toString() {
-		return "BookDataFormData [title=" + title + ", edition=" + edition
-				+ ", yearOfPublication=" + yearOfPublication + ", isbn=" + isbn + ", author=" + author
-				+ "]";
+		return "BookDataFormData{" +
+				"title='" + title + '\'' +
+				", edition='" + edition + '\'' +
+				", yearOfPublication='" + yearOfPublication + '\'' +
+				", isbn='" + isbn + '\'' +
+				", author='" + author + '\'' +
+				", bookCoverImageURL='" + bookCoverImageURL + '\'' +
+				", description='" + description + '\'' +
+				'}';
 	}
 
 	public void setBookCoverImageURL(String bookCoverImageURL) {
@@ -86,5 +95,13 @@ public class BookDataFormData {
 
 	public String getBookCoverImageURL() {
 		return bookCoverImageURL;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

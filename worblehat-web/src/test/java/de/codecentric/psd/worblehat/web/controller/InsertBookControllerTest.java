@@ -31,7 +31,7 @@ public class InsertBookControllerTest {
 
     private BindingResult bindingResult;
 
-    private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "http://some-url.com");
+    private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "http://some-url.com", "Some Description");
 
     @Before
     public void setUp() {
@@ -63,7 +63,7 @@ public class InsertBookControllerTest {
     public void shouldCreateNewCopyOfExistingBook() {
         setupFormData();
         when(bookService.bookExists(TEST_BOOK.getIsbn())).thenReturn(true);
-        when(bookService.createBook(any(), any(), any(), any(), anyInt(), anyString())).thenReturn(Optional.of(TEST_BOOK));
+        when(bookService.createBook(any(), any(), any(), any(), anyInt(), anyString(), anyString())).thenReturn(Optional.of(TEST_BOOK));
 
         String navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult);
 
@@ -75,7 +75,7 @@ public class InsertBookControllerTest {
     public void shouldCreateBookAndNavigateToBookList() {
         setupFormData();
         when(bookService.bookExists(TEST_BOOK.getIsbn())).thenReturn(false);
-        when(bookService.createBook(any(), any(), any(), any(), anyInt(), anyString())).thenReturn(Optional.of(TEST_BOOK));
+        when(bookService.createBook(any(), any(), any(), any(), anyInt(), anyString(), anyString())).thenReturn(Optional.of(TEST_BOOK));
 
         String navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult);
 
@@ -85,7 +85,7 @@ public class InsertBookControllerTest {
 
     private void verifyBookIsCreated() {
         verify(bookService).createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(),
-                TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication(), TEST_BOOK.getBookCoverImageURL());
+                TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication(), TEST_BOOK.getBookCoverImageURL(), TEST_BOOK.getDescription());
     }
 
     private void setupFormData() {
@@ -95,5 +95,6 @@ public class InsertBookControllerTest {
         bookDataFormData.setIsbn(TEST_BOOK.getIsbn());
         bookDataFormData.setYearOfPublication(String.valueOf(TEST_BOOK.getYearOfPublication()));
         bookDataFormData.setBookCoverImageURL(String.valueOf(TEST_BOOK.getBookCoverImageURL()));
+        bookDataFormData.setDescription(String.valueOf(TEST_BOOK.getDescription()));
     }
 }
