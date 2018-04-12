@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Return book - Worblehat Bookmanager</title>
+</head>
+<body>
+	<h1>Return book</h1>
+
+	<form th:object="${returnBookFormData}" method="POST">
+		 	Email Address:<input id="emailAddress" type="text" th:field="*{emailAddress}" />
+		<span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
+		<br />
+		 	Isbn:<input id="isbn" type="text" th:field="*{isbn}" />
+		<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+		<br />
+		<input type="submit" id="returnBook" value="Return book" />
+
+	</form>
+
+	<hr />
+	<a th:href="@{/}">Back to Home</a>
+</body>
+</html>
