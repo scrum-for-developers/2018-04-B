@@ -19,7 +19,7 @@ public class Worblehat {
 		String line;
 		do {
 			line = scan.nextLine();
-		} while (!line.equals("stop"));
+		} while (!"stop".equals(line));
 		applicationContext.close();
 	}
 
