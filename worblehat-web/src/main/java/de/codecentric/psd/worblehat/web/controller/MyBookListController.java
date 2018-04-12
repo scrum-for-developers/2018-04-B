@@ -44,18 +44,18 @@ public class MyBookListController {
     public String processSubmit(@ModelAttribute("myBookData") @Valid MyBookFormData myBookData,
                                 BindingResult result, ModelMap modelMap) {
         if (result.hasErrors()) {
-            return "myBookList";
+            return MY_BOOK_LIST_TEMPLATE_NAME;
         }
 
         List<Book> books = bookService.findMyBooksAsBooks(myBookData.getEmail());
 
         if(books.isEmpty()) {
             result.rejectValue("email", "noBorrowedBookExists");
-            return "myBookList";
+            return MY_BOOK_LIST_TEMPLATE_NAME;
         }
 
         modelMap.addAttribute("myBooks", books);
-        return "myBookList";
+        return MY_BOOK_LIST_TEMPLATE_NAME;
     }
 
     @ExceptionHandler(Exception.class)

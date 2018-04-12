@@ -27,7 +27,6 @@ import java.util.Set;
 public class BorrowBookController {
 
 	public static final String BORROW_TEMPLATE_NAME = "borrow";
-
 	private BookService bookService;
 
 	@Autowired
@@ -50,7 +49,7 @@ public class BorrowBookController {
 		Set<Book> books = bookService.findBooksByIsbn(borrowFormData.getIsbn());
 		if(books.isEmpty()) {
 			result.rejectValue("isbn", "noBookExists");
-			return "borrow";
+			return BORROW_TEMPLATE_NAME;
 		}
 		Optional<Borrowing> borrowing = bookService.borrowBook(borrowFormData.getIsbn(), borrowFormData.getEmail());
 
@@ -58,7 +57,7 @@ public class BorrowBookController {
 				.map(b -> "home")
 				.orElseGet( () -> {
 					result.rejectValue("isbn", "noBorrowableBooks");
-					return "borrow";
+					return BORROW_TEMPLATE_NAME;
 				});
 	}
 
