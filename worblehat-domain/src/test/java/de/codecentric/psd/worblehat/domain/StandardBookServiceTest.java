@@ -33,7 +33,7 @@ public class StandardBookServiceTest {
 
 	@Before
 	public void setup() {
-		aBook = new Book("title", "author", "edition", "isbn", 2016, "http://some-url.com");
+		aBook = new Book("title", "author", "edition", "isbn", 2016, "http://some-url.com", "Such a good description");
 		aCopyofBook = new Book("title", "author", "edition", "isbn", 2016);
 		anotherBook = new Book("title2", "author2", "edition2", "isbn2", 2016);
 
@@ -131,7 +131,7 @@ public class StandardBookServiceTest {
 	public void shouldCreateBook() {
 		when(bookRepository.save(any(Book.class))).thenReturn(aBook);
 		bookService.createBook(aBook.getTitle(), aBook.getAuthor(), aBook.getEdition(),
-				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL());
+				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL(),aBook.getDescription());
 
 		// assert that book was saved to repository
 		ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
@@ -149,7 +149,7 @@ public class StandardBookServiceTest {
 	public void shouldCreateAnotherCopyOfExistingBook() {
 		when(bookRepository.save(any(Book.class))).thenReturn(aBook);
 		bookService.createBook(aBook.getTitle(), aBook.getAuthor(), aBook.getEdition(),
-				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL());
+				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL(), aBook.getDescription());
 		verify(bookRepository, times(1)).save(any(Book.class));
 	}
 
@@ -157,7 +157,7 @@ public class StandardBookServiceTest {
 	public void shouldNotCreateAnotherCopyOfExistingBookWithDifferentTitle() {
 		givenALibraryWith(aBook);
 		bookService.createBook(aBook.getTitle() + "X", aBook.getAuthor(), aBook.getEdition(),
-				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL());
+				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL(),aBook.getDescription());
 		verify(bookRepository, times(0)).save(any(Book.class));
 	}
 
@@ -165,7 +165,7 @@ public class StandardBookServiceTest {
 	public void shouldNotCreateAnotherCopyOfExistingBookWithDifferentAuthor() {
 		givenALibraryWith(aBook);
 		bookService.createBook(aBook.getTitle(), aBook.getAuthor() + "X", aBook.getEdition(),
-				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL());
+				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getBookCoverImageURL(),aBook.getDescription());
 		verify(bookRepository, times(0)).save(any(Book.class));
 	}
 
