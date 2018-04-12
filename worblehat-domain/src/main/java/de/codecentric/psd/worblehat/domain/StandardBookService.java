@@ -17,8 +17,9 @@ import java.util.Set;
 @Transactional
 public class StandardBookService implements BookService {
 
+	@SuppressWarnings("unused")
 	public StandardBookService() {
-
+		// Empty public constructor for injection
 	}
 
 	@Autowired

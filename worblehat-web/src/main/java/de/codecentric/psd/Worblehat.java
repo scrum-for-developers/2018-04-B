@@ -9,6 +9,10 @@ import java.util.Scanner;
 @SpringBootApplication
 public class Worblehat {
 
+	public Worblehat() {
+		// Empty public constructor for dependency injection
+	}
+
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(Worblehat.class, args);
