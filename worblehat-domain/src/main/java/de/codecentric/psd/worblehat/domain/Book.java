@@ -17,6 +17,7 @@ public class Book implements Serializable {
 	private long id;
 
 	private String title;
+	private String description;
 	private String author;
 	private String edition;
 
@@ -63,13 +64,14 @@ public class Book implements Serializable {
 		this.yearOfPublication = yearOfPublication;
 	}
 
-	public Book(@Nonnull String title, @Nonnull String author, @Nonnull String edition, @Nonnull  String isbn, int yearOfPublication, String bookCoverImageURL) {
+	public Book(@Nonnull String title, @Nonnull String author, @Nonnull String edition, @Nonnull  String isbn, int yearOfPublication, String bookCoverImageURL, String description) {
 		this.title = title;
 		this.author = author;
 		this.edition = edition;
 		this.isbn = isbn;
 		this.yearOfPublication = yearOfPublication;
 		this.bookCoverImageURL = bookCoverImageURL;
+		this.description = description;
 	}
 
 	public String getTitle() {
@@ -138,14 +140,26 @@ public class Book implements Serializable {
         }
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
 		return "Book{" +
-				"title='" + title + '\'' +
+				"id=" + id +
+				", title='" + title + '\'' +
+				", description='" + description + '\'' +
 				", author='" + author + '\'' +
 				", edition='" + edition + '\'' +
 				", isbn='" + isbn + '\'' +
 				", yearOfPublication=" + yearOfPublication +
+				", bookCoverImageURL='" + bookCoverImageURL + '\'' +
+				", borrowing=" + borrowing +
 				'}';
 	}
 }
