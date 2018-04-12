@@ -27,7 +27,7 @@ import java.util.Set;
 public class BorrowBookController {
 
 	public static final String BORROW_TEMPLATE_NAME = "borrow";
-	
+
 	private BookService bookService;
 
 	@Autowired
