@@ -1,12 +1,9 @@
 package de.codecentric.psd.worblehat.web.controller;
 
 import de.codecentric.psd.worblehat.domain.Book;
-import de.codecentric.psd.worblehat.domain.BookAlreadyBorrowedException;
 import de.codecentric.psd.worblehat.domain.BookService;
 import de.codecentric.psd.worblehat.domain.Borrowing;
 import de.codecentric.psd.worblehat.web.formdata.BookBorrowFormData;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.SetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +26,8 @@ import java.util.Set;
 @Controller
 public class BorrowBookController {
 
+	public static final String BORROW_TEMPLATE_NAME = "borrow";
+	
 	private BookService bookService;
 
 	@Autowired
@@ -46,7 +45,7 @@ public class BorrowBookController {
 	public String processSubmit(@ModelAttribute("borrowFormData") @Valid BookBorrowFormData borrowFormData,
 			BindingResult result) {
 		if (result.hasErrors()) {
-			return "borrow";
+			return BORROW_TEMPLATE_NAME;
 		}
 		Set<Book> books = bookService.findBooksByIsbn(borrowFormData.getIsbn());
 		if(books.isEmpty()) {

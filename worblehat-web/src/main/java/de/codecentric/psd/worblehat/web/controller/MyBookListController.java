@@ -24,6 +24,8 @@ import java.util.List;
 @RequestMapping("/viewMyBooks")
 public class MyBookListController {
 
+    public static final String MY_BOOK_LIST_TEMPLATE_NAME = "myBookList";
+
     private BookService bookService;
 
     @Autowired
@@ -34,7 +36,7 @@ public class MyBookListController {
     @RequestMapping(method = RequestMethod.GET)
     public String setupForm(final ModelMap model) {
         model.put("myBookData", new MyBookFormData());
-        return "myBookList";
+        return MY_BOOK_LIST_TEMPLATE_NAME;
     }
 
     @Transactional
