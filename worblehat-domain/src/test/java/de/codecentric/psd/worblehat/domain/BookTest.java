@@ -1,7 +1,6 @@
 package de.codecentric.psd.worblehat.domain;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -31,11 +30,9 @@ public class BookTest {
     }
 
     @Test
-    @Ignore
-    public void shouldReturnTrueWhenAllButTitleAndAuthorAreDifferent() {
+    public void shouldReturnTrueWhenAllButTitleAndAuthorAndIsbnAreDifferent() {
         Book anotherCopy = new Book(BOOK.getTitle(), BOOK.getAuthor(), BOOK.getEdition(), BOOK.getIsbn(), BOOK.getYearOfPublication());
         anotherCopy.setEdition("2000");
-        anotherCopy.setIsbn("123456789X");
         anotherCopy.setYearOfPublication(2010);
         assertThat(BOOK.isSameCopy(anotherCopy), is(true));
     }
