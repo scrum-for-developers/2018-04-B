@@ -43,5 +43,14 @@
 				Anzeige der Anwendungs-Version auf allen Seiten
 			</action>
 		</release>
+
+		<release version="1.3" date="2018-04-12" description="Improved functionality according to PO">
+			<action dev="rené/michael" type="update">
+				Trim on ISBN input fields
+			</action>
+			<action dev="rené/michael" type="update">
+				Added possibility of 13 character long ISBN
+			</action>
+		</release>
 	</body>
 </document>
