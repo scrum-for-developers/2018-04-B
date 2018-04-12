@@ -19,7 +19,7 @@ public class MyBookListControllerTest {
 
     private BookService bookService;
 
-    private BookListController bookListController;
+    private MyBookListController myBookListController;
 
     private static final Book TEST_BOOK1 = new Book("title", "author", "edition", "isbn", 2016);
     private static final Book TEST_BOOK2 = new Book("title", "author", "edition", "isbn", 2016);
@@ -32,22 +32,22 @@ public class MyBookListControllerTest {
         TEST_BOOK2.borrowNowByBorrower(TEST_BORROWER);
 
         bookService = mock(BookService.class);
-        bookListController = new BookListController(bookService);
+        myBookListController = new MyBookListController(bookService);
         modelMap = new ModelMap();
     }
 
     @Test
     public void shouldNavigateToBookList() throws Exception {
-        String url = bookListController.setupForm(modelMap);
+        String url = myBookListController.setupForm(modelMap);
         assertThat(url, is("myBookList"));
     }
 
     @Test
     public void shouldContainBooks() throws Exception {
-        List<Book> bookList = new ArrayList();
+        List<Book> bookList = new ArrayList<>();
         bookList.add(TEST_BOOK2);
         when(bookService.findMyBooksAsBooks(TEST_BORROWER)).thenReturn(bookList);
-        bookListController.setupForm(modelMap);
+        myBookListController.setupForm(modelMap);
         List<Book> actualBooks = (List<Book>)modelMap.get("books");
         assertThat(actualBooks, not(bookList));
     }
