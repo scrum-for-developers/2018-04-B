@@ -19,6 +19,8 @@ import javax.validation.Valid;
 @RequestMapping("/returnBook")
 public class ReturnBookController {
 
+    private static final String RETURN_BOOK_PAGE = "returnBook";
+    private static final String HOME_PAGE = "home";
     private BookService bookService;
 
     @Autowired
@@ -36,7 +38,7 @@ public class ReturnBookController {
             @ModelAttribute("returnBookFormData") @Valid ReturnBookFormData formData,
             BindingResult result) {
         if (result.hasErrors()) {
-            return "returnBook";
+            return RETURN_BOOK_PAGE;
         }
         return returnBorrowedBook(formData, result);
 
@@ -49,25 +51,25 @@ public class ReturnBookController {
             return handleReturnByTitle(formData, result);
         }
         String isbnOrTitleMustBeSetError = "Please enter an ISBN or a title";
-        result.rejectValue("isbn", "error.user", isbnOrTitleMustBeSetError);
-        result.rejectValue("title", "error.user", isbnOrTitleMustBeSetError);
-        return "returnBook";
+        result.rejectValue("isbn", isbnOrTitleMustBeSetError);
+        result.rejectValue("title", isbnOrTitleMustBeSetError);
+        return RETURN_BOOK_PAGE;
     }
 
     private String handleReturnByTitle(ReturnBookFormData formData, BindingResult result) {
         if (bookService.returnBookByBorrowerAndTitle(formData.getEmailAddress(), formData.getTitle().trim())) {
-            return "home";
+            return HOME_PAGE;
         }
-        result.rejectValue("title", "error.user", "Cannot find a borrowed book with this title");
-        return "returnBook";
+        result.rejectValue("title", "Cannot find a borrowed book with this title");
+        return RETURN_BOOK_PAGE;
     }
 
     private String handleReturnByIsbn(ReturnBookFormData formData, BindingResult result) {
         if (bookService.returnBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn().trim())) {
-            return "home";
+            return HOME_PAGE;
         }
-        result.rejectValue("isbn", "error.user", "Cannot find a borrowed book with this isbn");
-        return "returnBook";
+        result.rejectValue("isbn", "Cannot find a borrowed book with this isbn");
+        return RETURN_BOOK_PAGE;
     }
 
     private boolean isNotEmptyOrNull(String isbn) {
