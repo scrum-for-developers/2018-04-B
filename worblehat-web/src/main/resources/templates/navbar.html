@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="navbar">
+    <h3>Users</h3>
+    <ul>
+        <li><a th:href="@{/bookList}">Show all books</a></li>
+        <li><a th:href="@{/borrow}">Borrow book</a></li>
+        <li><a th:href="@{/viewMyBooks}">My borrowed books</a></li>
+        <li><a th:href="@{/returnAllBooks}">Return all books</a></li>
+        <li><a th:href="@{/returnBook}">Return a book</a></li>
+    </ul>
+
+    <h3>Admin</h3>
+    <ul>
+        <li><a th:href="@{/insertBooks}">Add a new book</a></li>
+    </ul>
+</div>
+</html>

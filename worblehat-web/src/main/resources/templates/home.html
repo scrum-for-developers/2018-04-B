@@ -2,20 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Worblehat Bookmanager</title>
+    <link th:href="@{css/main.css}" rel="stylesheet"/>
+
 </head>
 <body>
+<div class="container">
+    <div class="navigation" th:include="navbar :: navbar"></div>
+
+    <div class="content">
 <h1 id="welcome_heading"><span th:text="${@environment.getProperty('spring.application.name')}"></span></h1>
 
-<ul>
-    <li><a th:href="@{/bookList}">Show all Books</a></li>
-    <li><a th:href="@{/insertBooks}">Add a new book</a></li>
-    <li><a th:href="@{/borrow}">Borrow Book</a></li>
-    <li><a th:href="@{/returnAllBooks}">Return all Books</a></li>
-    <li><a th:href="@{/viewMyBooks}">My borrowed books</a></li>
-    <li><a th:href="@{/returnBook}">Return a book</a></li>
-</ul>
-
-
+    </div></div>
 <div style="position: relative; bottom: 0"  th:include="footer :: footer"></div>
 </body>
 </html>

@@ -2,25 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Return book - Worblehat Bookmanager</title>
+	<link th:href="@{css/main.css}" rel="stylesheet"/>
+
 </head>
 <body>
+<div class="container">
+	<div class="navigation" th:include="navbar :: navbar"></div>
+
+	<div class="content">
 	<h1>Return book by ISBN or title</h1>
 
-	<form th:object="${returnBookFormData}" method="POST">
-		 	Email Address:<input id="emailAddress" type="text" th:field="*{emailAddress}" />
-		<span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
-		<br />
-		 	Isbn:<input id="isbn" type="text" th:field="*{isbn}" />
-		<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-		<br />
-			Title:<input id="title" type="text" th:field="*{title}" />
-		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-		<br />
-		<input type="submit" id="returnBook" value="Return book" />
+		<fieldset>
+			<form th:object="${returnBookFormData}" method="POST">
+				<label th:for="emailAdress">Email address:</label>
+					<input id="emailAddress" type="text" th:field="*{emailAddress}" />
+				<span class="form-error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
+				<br />
+				<label th:for="isbn">ISBN:</label>
+					<input id="isbn" type="text" th:field="*{isbn}" />
+				<span class="form-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+				<br />
+				<label th:for="title">Title:</label>
+					<input id="title" type="text" th:field="*{title}" />
+				<span class="form-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+				<br />
+				<input type="submit" id="returnBook" value="Return book" />
 
-	</form>
+			</form>
+		</fieldset>
+	</div></div>
+<div style="position: relative; bottom: 0"  th:include="footer :: footer"></div>
 
-	<hr />
-	<a th:href="@{/}">Back to Home</a>
 </body>
 </html>

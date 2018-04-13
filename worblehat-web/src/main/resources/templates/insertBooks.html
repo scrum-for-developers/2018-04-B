@@ -1,38 +1,51 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"><head>
 <title>Add Book - Worblehat Bookmanager</title>
+	<link th:href="@{css/main.css}" rel="stylesheet"/>
+
 </head>
 <body>
-	<h1>Add Book</h1>
+<div class="container">
+	<div class="navigation" th:include="navbar :: navbar"></div>
+
+	<div class="content">
+	<h1>Add book</h1>
 
 	<form th:object="${bookDataFormData}" method="POST">
-			Title:<input type="text" th:field="*{title}" />
-		<span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-		<br />
-			Edition:<input type="text" th:field="*{edition}" />
-		<span class="error" th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
-		<br />
-			ISBN:<input type="text" th:field="*{isbn}" />
-		<span class="error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-		<br />
-			Author:<input type="text" th:field="*{author}" />
-		<span class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
-		<br />
-			Year:<input type="text" th:field="*{yearOfPublication}" />
-		<span class="error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
-		<br />
-			Cover Image URL:<input type="text" th:field="*{bookCoverImageURL}" />
-		<span class="error" th:if="${#fields.hasErrors('bookCoverImageURL')}" th:errors="*{bookCoverImageURL}"></span>
-		<br />
-		Description:<textarea th:field="*{description}" rows="10" cols="50" />
-		<span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-		<br />
-		<input type="submit" id="addBook" value="Add Book" />
-		<hr/>
-		<a th:href="@{/}">Back to Home</a>
+		<fieldset>
+			<label th:for="title">Title:</label>
+			<input type="text" th:field="*{title}" />
+			<span class="form-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+			<br />
+			<label th:for="edition">Edition:</label>
+			<input type="text" th:field="*{edition}" />
+			<span class="form-error" th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
+			<br />
+			<label th:for="isbn">ISBN:</label>
+			<input type="text" th:field="*{isbn}" />
+			<span class="form-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+			<br />
+			<label th:for="author">Author:</label>
+			<input type="text" th:field="*{author}" />
+			<span class="form-error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+			<br />
+			<label th:for="yearOfPublication">Year:</label>
+			<input type="text" th:field="*{yearOfPublication}" />
+			<span class="form-error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
+			<br />
+			<label th:for="bookCoverImageURL">Cover Image URL:</label>
+			<input type="text" th:field="*{bookCoverImageURL}" />
+			<span class="form-error" th:if="${#fields.hasErrors('bookCoverImageURL')}" th:errors="*{bookCoverImageURL}"></span>
+			<br />
+			<label th:for="description">Description:</label>
+			<textarea th:field="*{description}" rows="10" cols="50" />
+			<span class="form-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+			<br />
+			<input type="submit" id="addBook" value="Add Book" />
+		</fieldset>
 	</form>
 
-
+	</div></div>
 	<div style="position: relative; bottom: 0"  th:include="footer :: footer"></div>
 </body>
 </html>
