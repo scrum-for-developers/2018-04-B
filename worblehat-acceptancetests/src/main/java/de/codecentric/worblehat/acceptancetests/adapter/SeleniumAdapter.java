@@ -56,6 +56,16 @@ public class SeleniumAdapter {
         driver.get(concreteUrl);
     }
 
+    public void clickOnLinkWithText(String text) {
+        WebElement element = driver.findElement(By.linkText(text));
+        element.click();
+    }
+
+    public boolean pageContainsText(String text) {
+        WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
+        return element != null;
+    }
+
     public void typeIntoField(String id, String value) {
         WebElement element = driver.findElement(By.id(id));
         element.clear();

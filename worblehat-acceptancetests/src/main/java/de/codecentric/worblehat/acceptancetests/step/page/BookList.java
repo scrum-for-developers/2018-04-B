@@ -1,21 +1,22 @@
 package de.codecentric.worblehat.acceptancetests.step.page;
 
+import de.codecentric.psd.worblehat.domain.Book;
+import de.codecentric.worblehat.acceptancetests.adapter.SeleniumAdapter;
 import de.codecentric.worblehat.acceptancetests.adapter.wrapper.HtmlBook;
 import de.codecentric.worblehat.acceptancetests.adapter.wrapper.HtmlBookList;
 import de.codecentric.worblehat.acceptancetests.adapter.wrapper.Page;
-import de.codecentric.worblehat.acceptancetests.adapter.SeleniumAdapter;
 import de.codecentric.worblehat.acceptancetests.adapter.wrapper.PageElement;
 import de.codecentric.worblehat.acceptancetests.step.business.DemoBookFactory;
-import de.codecentric.psd.worblehat.domain.Book;
-import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 @Component("BookList")
 public class BookList {
@@ -100,6 +101,18 @@ public class BookList {
                 put("Borrower", borrower);
             }
         };
+    }
+
+    @When("user opens the details of the book with title $title")
+    public void userOpensTheDetailsPageOfABook(String title){
+        seleniumAdapter.gotoPage(Page.BOOKLIST);
+        seleniumAdapter.clickOnLinkWithText(title);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // pass
+        }
+        assertThat(seleniumAdapter.pageContainsText(title), is(true));
     }
 
 }

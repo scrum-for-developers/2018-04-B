@@ -111,5 +111,10 @@ public class StandardBookService implements BookService {
 		bookRepository.deleteAll();
 	}
 
+	@Override
+	public Book findBookById(Long id) {
+		return bookRepository.findById(id);
+	}
+
 
 }
