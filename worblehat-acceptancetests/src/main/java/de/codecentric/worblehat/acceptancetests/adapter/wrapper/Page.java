@@ -4,7 +4,8 @@ public enum Page {
     BOOKLIST("bookList"),
     INSERTBOOKS("insertBooks"),
     BORROWBOOK("borrow"),
-    RETURNBOOKS("returnAllBooks");
+    RETURNBOOKS("returnAllBooks"),
+    VIEWMYBOOKS("viewMyBooks");
 
     private String url;
 

@@ -1,6 +1,5 @@
 package de.codecentric.worblehat.acceptancetests.adapter.wrapper;
 
-import de.codecentric.worblehat.acceptancetests.step.business.DemoBookFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -47,6 +46,8 @@ public class HtmlBookList {
 					case "ISBN":
 						book.setIsbn(cells.get(currentColumn).getText());
 						break;
+					case "Return Date":
+						book.setReturnDate(cells.get(currentColumn).getText());
 
 				}
 				currentColumn++;
