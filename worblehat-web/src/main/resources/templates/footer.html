@@ -1,0 +1,7 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="footer">
+    <p>Version: <span th:text="${@environment.getProperty('build.version')}"></span></p>
+</div>
+</html>

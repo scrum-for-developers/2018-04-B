@@ -4,6 +4,7 @@ import de.codecentric.psd.worblehat.web.validation.ISBN;
 import de.codecentric.psd.worblehat.web.validation.Numeric;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 /**
  * This class represent the form data of the add book form.
@@ -29,6 +30,11 @@ public class BookDataFormData {
 	@NotEmpty(message = "{empty.bookDataFormData.author}")
 	private String author;
 
+	@URL(message = "{notvalid.bookDataFormData.bookCoverImageURL}")
+	private String bookCoverImageURL;
+
+	private String description;
+
 	public String getYearOfPublication() {
 		return yearOfPublication;
 	}
@@ -42,7 +48,7 @@ public class BookDataFormData {
 	}
 
 	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+		this.isbn = isbn.replace("-", "").trim();
 	}
 
 	public String getAuthor() {
@@ -69,11 +75,33 @@ public class BookDataFormData {
 		this.edition = edition;
 	}
 
+
 	@Override
 	public String toString() {
-		return "BookDataFormData [title=" + title + ", edition=" + edition
-				+ ", yearOfPublication=" + yearOfPublication + ", isbn=" + isbn + ", author=" + author
-				+ "]";
+		return "BookDataFormData{" +
+				"title='" + title + '\'' +
+				", edition='" + edition + '\'' +
+				", yearOfPublication='" + yearOfPublication + '\'' +
+				", isbn='" + isbn + '\'' +
+				", author='" + author + '\'' +
+				", bookCoverImageURL='" + bookCoverImageURL + '\'' +
+				", description='" + description + '\'' +
+				'}';
 	}
 
+	public void setBookCoverImageURL(String bookCoverImageURL) {
+		this.bookCoverImageURL = bookCoverImageURL;
+	}
+
+	public String getBookCoverImageURL() {
+		return bookCoverImageURL;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

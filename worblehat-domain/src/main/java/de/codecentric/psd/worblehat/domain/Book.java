@@ -1,10 +1,8 @@
 package de.codecentric.psd.worblehat.domain;
 
 import javax.annotation.Nonnull;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * Entity implementation class for Entity: Book
@@ -12,119 +10,159 @@ import java.util.Optional;
 @Entity
 public class Book implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	private String title;
-	private String author;
-	private String edition;
 
-	// TODO: convert String to an ISBN class, that ensures a valid ISBN
-	private String isbn;
-	private int yearOfPublication;
+    private String title;
 
-	@OneToOne(mappedBy = "borrowedBook", orphanRemoval = true)
-	private Borrowing borrowing;
+    @Column(columnDefinition = "text")
+    private String description;
+    private String author;
+    private String edition;
 
-	/**
-	 * Empty constructor needed by Hibernate.
-	 */
-	private Book() {
-		super();
-	}
+    // TODO: convert String to an ISBN class, that ensures a valid ISBN
+    private String isbn;
+    private int yearOfPublication;
 
-	/**
-	 * Creates a new book instance.
-	 * 
-	 * @param title
-	 *            the title
-	 * @param author
-	 *            the author
-	 * @param edition
-	 *            the edition
-	 * @param isbn
-	 *            the isbn
-	 * @param yearOfPublication
-	 *            the yearOfPublication
-	 */
-	public Book(@Nonnull String title,
-				@Nonnull String author,
-				@Nonnull String edition,
-				@Nonnull String isbn,
-				int yearOfPublication) {
-		super();
-		this.title = title;
-		this.author = author;
-		this.edition = edition;
-		this.isbn = isbn;
-		this.yearOfPublication = yearOfPublication;
-	}
+    private String bookCoverImageURL;
 
-	public String getTitle() {
-		return title;
-	}
+    @OneToOne(mappedBy = "borrowedBook", orphanRemoval = true)
+    private Borrowing borrowing;
 
-	public String getAuthor() {
-		return author;
-	}
+    /**
+     * Empty constructor needed by Hibernate.
+     */
+    private Book() {
+        super();
+    }
 
-	public String getEdition() {
-		return edition;
-	}
+    /**
+     * Creates a new book instance.
+     *
+     * @param title             the title
+     * @param author            the author
+     * @param edition           the edition
+     * @param isbn              the isbn
+     * @param yearOfPublication the yearOfPublication
+     */
+    public Book(@Nonnull String title,
+                @Nonnull String author,
+                @Nonnull String edition,
+                @Nonnull String isbn,
+                int yearOfPublication) {
+        super();
+        this.title = title;
+        this.author = author;
+        this.edition = edition;
+        this.isbn = isbn;
+        this.yearOfPublication = yearOfPublication;
+    }
 
-	public String getIsbn() {
-		return isbn;
-	}
+    public Book(@Nonnull String title, @Nonnull String author, @Nonnull String edition, @Nonnull String isbn, int yearOfPublication, String bookCoverImageURL, String description) {
+        this.title = title;
+        this.author = author;
+        this.edition = edition;
+        this.isbn = isbn;
+        this.yearOfPublication = yearOfPublication;
+        this.bookCoverImageURL = bookCoverImageURL;
+        this.description = description;
+    }
 
-	public int getYearOfPublication() {
-		return yearOfPublication;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public String getEdition() {
+        return edition;
+    }
 
-	public void setEdition(String edition) {
-		this.edition = edition;
-	}
+    public String getIsbn() {
+        return isbn;
+    }
 
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
+    public int getYearOfPublication() {
+        return yearOfPublication;
+    }
 
-	public void setYearOfPublication(int yearOfPublication) {
-		this.yearOfPublication = yearOfPublication;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setYearOfPublication(int yearOfPublication) {
+        this.yearOfPublication = yearOfPublication;
+    }
 
     public Borrowing getBorrowing() {
-		return borrowing;
-	}
+        return borrowing;
+    }
+
+    public String getBookCoverImageURL() {
+        return bookCoverImageURL;
+    }
+
+    public void setBookCoverImageURL(String bookCoverImageURL) {
+        this.bookCoverImageURL = bookCoverImageURL;
+    }
+
+    public boolean hasBookCover() {
+        return this.bookCoverImageURL != null && !this.bookCoverImageURL.isEmpty();
+    }
 
 	boolean isSameCopy(@Nonnull Book book) {
-		return getTitle().equals(book.title) && getAuthor().equals(book.author);
+		return getTitle().equals(book.title) && getAuthor().equals(book.author) && getEdition().equals(book.edition);
 	}
 
-	public void borrowNowByBorrower(String borrowerEmailAddress) {
-		if (borrowing == null) {
+    public void borrowNowByBorrower(String borrowerEmailAddress) {
+        if (borrowing == null) {
             this.borrowing = new Borrowing(this, borrowerEmailAddress);
         }
-	}
+    }
 
-	@Override
-	public String toString() {
-		return "Book{" +
-				"title='" + title + '\'' +
-				", author='" + author + '\'' +
-				", edition='" + edition + '\'' +
-				", isbn='" + isbn + '\'' +
-				", yearOfPublication=" + yearOfPublication +
-				'}';
-	}
+    public String getDescription() {
+        if ( description == null){
+            return "";
+        }
+        return description;
+    }
+
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", author='" + author + '\'' +
+                ", edition='" + edition + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", yearOfPublication=" + yearOfPublication +
+                ", bookCoverImageURL='" + bookCoverImageURL + '\'' +
+                ", borrowing=" + borrowing +
+                '}';
+    }
 }

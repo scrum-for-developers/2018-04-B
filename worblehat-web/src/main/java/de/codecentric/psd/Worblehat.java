@@ -9,6 +9,10 @@ import java.util.Scanner;
 @SpringBootApplication
 public class Worblehat {
 
+	public Worblehat() {
+		// Empty public constructor for dependency injection
+	}
+
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(Worblehat.class, args);
@@ -16,10 +20,10 @@ public class Worblehat {
 		// this code is basically to (a) demonstrate how to stop a Spring application and (b)
 		// get rid of the SonarQube warning to close the context properly
 		System.out.println("Enter 'stop' to stop Worblehat.");
-		String line = "";
+		String line;
 		do {
 			line = scan.nextLine();
-		} while (!line.equals("stop"));
+		} while (!"stop".equals(line));
 		applicationContext.close();
 	}
 

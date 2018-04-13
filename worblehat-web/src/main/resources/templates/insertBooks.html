@@ -21,11 +21,18 @@
 			Year:<input type="text" th:field="*{yearOfPublication}" />
 		<span class="error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
 		<br />
+			Cover Image URL:<input type="text" th:field="*{bookCoverImageURL}" />
+		<span class="error" th:if="${#fields.hasErrors('bookCoverImageURL')}" th:errors="*{bookCoverImageURL}"></span>
+		<br />
+		Description:<textarea th:field="*{description}" rows="10" cols="50" />
+		<span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+		<br />
 		<input type="submit" id="addBook" value="Add Book" />
 		<hr/>
 		<a th:href="@{/}">Back to Home</a>
 	</form>
 
 
+	<div style="position: relative; bottom: 0"  th:include="footer :: footer"></div>
 </body>
 </html>

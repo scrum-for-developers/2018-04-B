@@ -7,7 +7,9 @@
 	<table class="bookList">
 	<thead>
 		<tr>
+			<th>Cover</th>
 			<th>Title</th>
+			<th>Description</th>
 			<th>Author</th>
 			<th>Year</th>
 			<th>Edition</th>
@@ -17,7 +19,9 @@
 	</thead>
 	<tbody>
 		<tr th:each="book : ${books}">
+			<td><img th:src="${book.bookCoverImageURL}" alt="" style="width:100px" /></td>
 			<td th:text="${book.title}">Harry Potter</td>
+			<td width="450px" th:utext="${#strings.replace( #strings.escapeXml( book.description ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">...</td>
 			<td th:text="${book.author}">J.K. Rowling</td>
 			<td th:text="${book.yearOfPublication}">2002</td>
 			<td th:text="${book.edition}">1st</td>
@@ -28,5 +32,7 @@
 	</table>
 	<hr />
 	<a th:href="@{/}">Back to Home</a>
+
+	<div style="position: relative; bottom: 0"  th:include="footer :: footer"></div>
 </body>
 </html>
