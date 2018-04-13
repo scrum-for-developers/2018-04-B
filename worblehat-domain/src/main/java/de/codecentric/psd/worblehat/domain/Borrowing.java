@@ -56,4 +56,8 @@ public class Borrowing implements Serializable {
 	public Book getBorrowedBook() {
 		return borrowedBook;
 	}
+
+	public Date getBorrowDate() {
+		return borrowDate;
+	}
 }
