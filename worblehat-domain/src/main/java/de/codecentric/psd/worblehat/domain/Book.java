@@ -158,10 +158,7 @@ public class Book implements Serializable {
             return null;
         }
 
-        final DateTime borrowDate = new DateTime(borrowing.getBorrowDate());
-        borrowDate.plusDays(14);
-
-        return borrowDate.toDate();
+        return new DateTime(borrowing.getBorrowDate()).plusDays(14).toDate();
     }
 
     @Override
