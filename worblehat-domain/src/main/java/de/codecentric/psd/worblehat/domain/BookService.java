@@ -25,6 +25,23 @@ public interface BookService {
 
 	void deleteAllBooks();
 
+
+	/**
+	 * Return true is book was deleted
+	 * @param emailAddress
+	 * @param isbn
+	 * @return
+	 */
+    boolean returnBookByBorrowerAndIsbn(String emailAddress, String isbn);
+
+	/**
+	 * Return true is book was deleted
+	 * @param emailAddress
+	 * @param title
+	 * @return
+	 */
+    boolean returnBookByBorrowerAndTitle(String emailAddress, String title);
+
 	List<Borrowing> findMyBooksAsBorrowings(String borrower);
 
 	List<Book> findMyBooksAsBooks(String borrower);

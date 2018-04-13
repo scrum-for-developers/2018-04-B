@@ -2,7 +2,7 @@ package de.codecentric.worblehat.acceptancetests.adapter.wrapper;
 
 public enum PageElement {
     ADDBOOKBUTTON("addBook"), BOOKLIST("bookList"), BORROWBOOKBUTTON("borrowBook"), ISBNERROR("isbn-error"),
-    RETURNALLBOOKSBUTTON("returnAllBooks"), ERROR("error"), SHOWMYBOOKSBUTTON("showMyBooks");
+    RETURNALLBOOKSBUTTON("returnAllBooks"),RETURNBOOKBUTTON("returnBook"), SHOWMYBOOKSBUTTON("showMyBooks"), ERROR("error");
 
 
     private String elementId;

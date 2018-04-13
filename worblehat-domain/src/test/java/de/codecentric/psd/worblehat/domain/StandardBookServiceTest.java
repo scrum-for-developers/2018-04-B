@@ -200,9 +200,26 @@ public class StandardBookServiceTest {
 		verify(borrowingRepository).deleteAll();
 	}
 
+    @Test
+    public void shouldFindOneBookById() {
+        when(bookRepository.findById(new Long(1))).thenReturn(aBook);
+        assertTrue(aBook.getId()==new Long(1));
+    }
+
 	@Test
-	public void shouldFindOneBookById() {
-		when(bookRepository.findById(new Long(1))).thenReturn(aBook);
-		assertTrue(aBook.getId()==new Long(1));
+	public void shouldReturnOnlyOneBookByISBN() {
+		bookService.returnBookByBorrowerAndIsbn(BORROWER_EMAIL, aBorrowedBook.getIsbn());
+		verify(borrowingRepository).delete(aBorrowing);
+
+		verify(borrowingRepository, never()).delete(anotherBorrowing);
+	}
+
+
+	@Test
+	public void shouldReturnOnlyOneBookByTitle() {
+		bookService.returnBookByBorrowerAndTitle(BORROWER_EMAIL, aBorrowedBook.getTitle());
+		verify(borrowingRepository).delete(aBorrowing);
+
+		verify(borrowingRepository, never()).delete(anotherBorrowing);
 	}
 }

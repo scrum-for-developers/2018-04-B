@@ -74,6 +74,14 @@ public class BookList {
         }
     }
 
+    @Then("the book $isbn is not borrowed anymore by borrower $borrower")
+    public void bookIsNotBorrowedByBorrower1(String isbn,
+                                               String borrower){
+        seleniumAdapter.gotoPage(Page.BOOKLIST);
+        HtmlBookList htmlBookList = seleniumAdapter.getTableContent(PageElement.BOOKLIST);
+        assertThat(htmlBookList.getBookByIsbn(isbn).getBorrower(), is(isEmptyOrNullString()));
+    }
+
     @Then("books $isbns are still borrowed by borrower $borrower")
     public void booksAreStillBorrowedByBorrower2(String isbns,
                                                  String borrower2){
