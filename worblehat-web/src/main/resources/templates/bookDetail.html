@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show book detail</title>
+</head>
+<body>
+<table class="bookList">
+    <tbody>
+    <tr>
+        <td><b>Cover:</b></td>
+        <td><img th:src="${book.bookCoverImageURL}" alt="" style="width:100px" /></td>
+    </tr>
+
+    <tr>
+        <td><b>Title:</b></td>
+        <td th:text="${book.title}">Harry Potter</td>
+    </tr>
+
+    <tr>
+        <td><b>Description:</b></td>
+        <td width="450px" th:utext="${#strings.replace( #strings.escapeXml( book.description ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">...</td>
+    </tr>
+
+    <tr>
+        <td><b>Author:</b></td>
+        <td th:text="${book.author}">J.K. Rowling</td>
+    </tr>
+
+    <tr>
+        <td><b>Year:</b></td>
+        <td th:text="${book.yearOfPublication}">2002</td>
+    </tr>
+
+    <tr>
+        <td><b>Edition:</b></td>
+        <td th:text="${book.edition}">1st</td>
+    </tr>
+
+    <tr>
+        <td><b>ISBN:</b></td>
+        <td th:text="${book.isbn}">123456</td>
+    </tr>
+
+    <tr>
+        <td><b>Borrower:</b></td>
+        <td th:text="${book?.borrowing?.borrowerEmailAddress}">someone@codecentric.de</td>
+    </tr>
+    </tbody>
+</table>
+<hr />
+<a th:href="@{/bookList.html}">Back to Booklist</a>
+
+<div style="position: relative; bottom: 0"  th:include="footer :: footer"></div>
+</body>
+</html>

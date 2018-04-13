@@ -20,7 +20,11 @@
 	<tbody>
 		<tr th:each="book : ${books}">
 			<td><img th:src="${book.bookCoverImageURL}" alt="" style="width:100px" /></td>
-			<td th:text="${book.title}">Harry Potter</td>
+			<td>
+				<a th:href="@{/bookDetail.html(id=${book.id})}">
+					<div th:text="${book.title}">Harry Potter</div>
+				</a>
+			</td>
 			<td width="450px" th:utext="${#strings.replace( #strings.escapeXml( book.description ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">...</td>
 			<td th:text="${book.author}">J.K. Rowling</td>
 			<td th:text="${book.yearOfPublication}">2002</td>

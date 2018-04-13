@@ -22,7 +22,6 @@ public class StandardBookService implements BookService {
 		// Empty public constructor for injection
 	}
 
-
 	@Autowired
 	public StandardBookService(BorrowingRepository borrowingRepository, BookRepository bookRepository) {
 		this.borrowingRepository = borrowingRepository;
@@ -81,7 +80,7 @@ public class StandardBookService implements BookService {
 		}
 		return bookList;
 	}
-
+  
 	@Override
 	public Optional<Book> createBook(@Nonnull String title,
 									 @Nonnull String author,
@@ -112,6 +111,11 @@ public class StandardBookService implements BookService {
 		bookRepository.deleteAll();
 	}
 
+	@Override
+	public Book findBookById(Long id) {
+		return bookRepository.findById(id);
+	}
+
     @Override
     public boolean returnBookByBorrowerAndIsbn(String borrowerEmailAddress, String isbn) {
 
@@ -119,32 +123,34 @@ public class StandardBookService implements BookService {
         List<Borrowing> borrowingsByUser = borrowingRepository
                 .findBorrowingsByBorrower(borrowerEmailAddress);
 
-		Optional<Borrowing> found = borrowingsByUser.stream()
-				.filter(borrowing -> isbn != null && isbn.equalsIgnoreCase(borrowing.getBorrowedBook().getIsbn()))
-				.findFirst();
+        Optional<Borrowing> found = borrowingsByUser.stream()
+                .filter(borrowing -> isbn != null && isbn.equalsIgnoreCase(borrowing.getBorrowedBook().getIsbn()))
+                .findFirst();
 
-		if (found.isPresent()){
-			borrowingRepository.delete(found.get());
-			return true;
-		}
-		return false;
-	}
+        if (found.isPresent()){
+            borrowingRepository.delete(found.get());
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean returnBookByBorrowerAndTitle(String borrowerEmailAddress, String title) {
+    @Override
+    public boolean returnBookByBorrowerAndTitle(String borrowerEmailAddress, String title) {
 
-		List<Borrowing> borrowingsByUser = borrowingRepository
-				.findBorrowingsByBorrower(borrowerEmailAddress);
+        List<Borrowing> borrowingsByUser = borrowingRepository
+                .findBorrowingsByBorrower(borrowerEmailAddress);
 
 
-		Optional<Borrowing> found = borrowingsByUser.stream()
-				.filter(borrowing -> title != null && title.equalsIgnoreCase(borrowing.getBorrowedBook().getTitle()))
-				.findFirst();
+        Optional<Borrowing> found = borrowingsByUser.stream()
+                .filter(borrowing -> title != null && title.equalsIgnoreCase(borrowing.getBorrowedBook().getTitle()))
+                .findFirst();
 
-		if (found.isPresent()){
-			borrowingRepository.delete(found.get());
-			return true;
-		}
-		return false;
-	}
+        if (found.isPresent()){
+            borrowingRepository.delete(found.get());
+            return true;
+        }
+        return false;
+    }
+
+
 }

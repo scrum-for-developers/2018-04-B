@@ -52,5 +52,17 @@
 				Added possibility of 13 character long ISBN
 			</action>
 		</release>
+
+		<release version="1.4" date="2018-04-13" description="Added detail page and single page return">
+			<action dev="René/Michael" type="insert">
+				Add detail page to view a single book
+			</action>
+			<action dev="Vincent" type="insert">
+				Add page to return a single book
+			</action>
+			<action dev="Sebastian" type="insert">
+				Add page to view all borrowed books by a single user
+			</action>
+		</release>
 	</body>
 </document>

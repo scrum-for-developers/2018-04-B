@@ -1,8 +1,11 @@
 package de.codecentric.psd.worblehat.domain;
 
+import org.joda.time.DateTime;
+
 import javax.annotation.Nonnull;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Entity implementation class for Entity: Book
@@ -72,6 +75,10 @@ public class Book implements Serializable {
         this.description = description;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -128,9 +135,9 @@ public class Book implements Serializable {
         return this.bookCoverImageURL != null && !this.bookCoverImageURL.isEmpty();
     }
 
-	boolean isSameCopy(@Nonnull Book book) {
-		return getTitle().equals(book.title) && getAuthor().equals(book.author) && getEdition().equals(book.edition);
-	}
+    boolean isSameCopy(@Nonnull Book book) {
+        return getTitle().equals(book.title) && getAuthor().equals(book.author) && getEdition().equals(book.edition);
+    }
 
     public void borrowNowByBorrower(String borrowerEmailAddress) {
         if (borrowing == null) {
@@ -139,7 +146,7 @@ public class Book implements Serializable {
     }
 
     public String getDescription() {
-        if ( description == null){
+        if (description == null) {
             return "";
         }
         return description;
@@ -150,19 +157,26 @@ public class Book implements Serializable {
         this.description = description;
     }
 
+    public Date getReturnDate() {
+        if (borrowing == null) {
+            return null;
+        }
+
+        return new DateTime(borrowing.getBorrowDate()).plusDays(14).toDate();
+    }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", edition='" + edition + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", yearOfPublication=" + yearOfPublication +
-                ", bookCoverImageURL='" + bookCoverImageURL + '\'' +
-                ", borrowing=" + borrowing +
                 '}';
+    }
+
+    public long getId() {
+        return id;
     }
 }

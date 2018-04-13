@@ -17,6 +17,8 @@ public interface BookService {
 
 	List<Book> findAllBooks();
 
+	Book findBookById(Long id);
+
 	Optional<Book> createBook(String title, String author, String edition, String isbn, int yearOfPublication, String bookCoverImageURL, String description);
 
 	boolean bookExists(String isbn);

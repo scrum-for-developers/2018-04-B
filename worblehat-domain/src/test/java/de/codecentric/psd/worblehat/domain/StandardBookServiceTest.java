@@ -34,6 +34,7 @@ public class StandardBookServiceTest {
 	@Before
 	public void setup() {
 		aBook = new Book("title", "author", "edition", "isbn", 2016, "http://some-url.com", "Such a good description");
+		aBook.setId(new Long(1));
 		aCopyofBook = new Book("title", "author", "edition", "isbn", 2016);
 		anotherBook = new Book("title2", "author2", "edition2", "isbn2", 2016);
 
@@ -198,6 +199,12 @@ public class StandardBookServiceTest {
 		verify(bookRepository).deleteAll();
 		verify(borrowingRepository).deleteAll();
 	}
+
+    @Test
+    public void shouldFindOneBookById() {
+        when(bookRepository.findById(new Long(1))).thenReturn(aBook);
+        assertTrue(aBook.getId()==new Long(1));
+    }
 
 	@Test
 	public void shouldReturnOnlyOneBookByISBN() {
