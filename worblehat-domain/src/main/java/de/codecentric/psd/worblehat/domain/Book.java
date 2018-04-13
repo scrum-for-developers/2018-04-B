@@ -72,6 +72,10 @@ public class Book implements Serializable {
         this.description = description;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -164,5 +168,9 @@ public class Book implements Serializable {
                 ", bookCoverImageURL='" + bookCoverImageURL + '\'' +
                 ", borrowing=" + borrowing +
                 '}';
+    }
+
+    public long getId() {
+        return id;
     }
 }
