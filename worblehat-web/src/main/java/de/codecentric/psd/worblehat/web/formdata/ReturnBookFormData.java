@@ -13,9 +13,10 @@ public class ReturnBookFormData {
 	@Email(message = "{notvalid.returnAllBookFormData.emailAddress}")
 	private String emailAddress;
 
-	@NotEmpty(message = "{empty.bookDataFormData.isbn}")
 	@ISBN(message = "{notvalid.bookDataFormData.isbn}")
 	private String isbn;
+
+	private String title;
 
 	public String getEmailAddress() {
 		return emailAddress;
@@ -31,5 +32,13 @@ public class ReturnBookFormData {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

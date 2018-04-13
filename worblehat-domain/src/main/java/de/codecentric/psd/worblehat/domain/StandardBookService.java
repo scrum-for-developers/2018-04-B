@@ -113,16 +113,38 @@ public class StandardBookService implements BookService {
 	}
 
     @Override
-    public void returnBookByBorrowerAndIsbn(String borrowerEmailAddress, String isbn) {
+    public boolean returnBookByBorrowerAndIsbn(String borrowerEmailAddress, String isbn) {
+
+
         List<Borrowing> borrowingsByUser = borrowingRepository
                 .findBorrowingsByBorrower(borrowerEmailAddress);
 
-        borrowingsByUser.stream()
-                .filter(borrowing -> isbn != null && isbn.equalsIgnoreCase(borrowing.getBorrowedBook().getIsbn()))
-                .forEach(borrowing -> {
-                    borrowingRepository.delete(borrowing);
-                });
-    }
+		Optional<Borrowing> found = borrowingsByUser.stream()
+				.filter(borrowing -> isbn != null && isbn.equalsIgnoreCase(borrowing.getBorrowedBook().getIsbn()))
+				.findFirst();
+
+		if (found.isPresent()){
+			borrowingRepository.delete(found.get());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean returnBookByBorrowerAndTitle(String borrowerEmailAddress, String title) {
+
+		List<Borrowing> borrowingsByUser = borrowingRepository
+				.findBorrowingsByBorrower(borrowerEmailAddress);
 
 
+		Optional<Borrowing> found = borrowingsByUser.stream()
+				.filter(borrowing -> title != null && title.equalsIgnoreCase(borrowing.getBorrowedBook().getTitle()))
+				.findFirst();
+
+		if (found.isPresent()){
+			borrowingRepository.delete(found.get());
+			return true;
+		}
+		return false;
+	}
 }

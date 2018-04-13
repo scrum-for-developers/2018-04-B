@@ -4,7 +4,7 @@
 <title>Return book - Worblehat Bookmanager</title>
 </head>
 <body>
-	<h1>Return book</h1>
+	<h1>Return book by ISBN or title</h1>
 
 	<form th:object="${returnBookFormData}" method="POST">
 		 	Email Address:<input id="emailAddress" type="text" th:field="*{emailAddress}" />
@@ -12,6 +12,9 @@
 		<br />
 		 	Isbn:<input id="isbn" type="text" th:field="*{isbn}" />
 		<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+		<br />
+			Title:<input id="title" type="text" th:field="*{title}" />
+		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 		<br />
 		<input type="submit" id="returnBook" value="Return book" />
 
